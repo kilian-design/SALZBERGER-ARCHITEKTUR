@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Kilian Salzberger Lebenslauf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav" aria-label="Hauptnavigation">
+  <a class="schliessen" href="index.html" aria-label="Zurück zur Startseite">X</a>
+  <a href="architektur.html">Architektur</a>
+  <a href="design.html">Design</a>
+  <a href="lebenslauf.html" aria-current="page">Lebenslauf</a>
+  <a href="kontakt.html">Kontakt</a>
+</nav>
+
+<main class="dokument" id="dokument"></main>
+<noscript><p class="fehler">Zum Anzeigen wird JavaScript benötigt. <a href="pdf/lebenslauf.pdf">PDF direkt öffnen</a></p></noscript>
+
+<script src="viewer.js"></script>
+<script>
+  window.SiteViewer.document("pdf/lebenslauf.pdf", document.getElementById("dokument"));
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Kilian Salzberger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav" aria-label="Hauptnavigation">
+  <a href="architektur.html">Architektur</a>
+  <a href="design.html">Design</a>
+  <a href="lebenslauf.html">Lebenslauf</a>
+  <a href="kontakt.html">Kontakt</a>
+</nav>
+
+<div class="hintergrund" id="hintergrund" aria-hidden="true"></div>
+
+<main class="start">
+  <h1><a href="lebenslauf.html">KILIAN SALZBERGER</a></h1>
+</main>
+
+<script src="config.js"></script>
+<script src="viewer.js"></script>
+<script>
+  if (window.SITE && window.SITE.hintergrundPdf) {
+    window.SiteViewer.background(window.SITE.hintergrundPdf, document.getElementById("hintergrund"));
+  }
+</script>
+</body>
+</html>

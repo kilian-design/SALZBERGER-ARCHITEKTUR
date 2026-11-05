@@ -1,0 +1,134 @@
+/* Layout: weiße Fläche, Reiter oben mittig mit gleichem Abstand,
+   Schriftzug auf der Startseite mittig, PDFs füllen den Bildschirm. */
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --rand: #cfcfcf;
+  --nav-h: 4.75rem;
+  --font: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
+
+/* Reiter */
+.nav {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem clamp(1rem, 4vw, 3.5rem);
+  min-height: var(--nav-h);
+  padding: 1.75rem max(16px, env(safe-area-inset-right, 0px)) 0.75rem max(16px, env(safe-area-inset-left, 0px));
+  background: var(--bg);
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav a {
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { border-bottom-color: var(--fg); }
+
+/* X links neben den Reitern, nur auf den Unterseiten; führt zur Startseite.
+   Ohne top-Angabe bleibt es vertikal auf der Höhe der Reiter. */
+.nav .schliessen {
+  position: absolute;
+  left: max(16px, env(safe-area-inset-left, 0px));
+  font-size: 1.25em;
+  line-height: 1;
+}
+@media (max-width: 520px) {
+  .nav .schliessen { position: static; }
+}
+.nav a[aria-current="page"] { border-bottom-color: var(--fg); }
+
+/* Das Band über der Leiste, damit unter der Statusleiste nichts durchscheint */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 11;
+}
+
+/* Startseite */
+.hintergrund {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hintergrund canvas { display: block; }
+
+.start {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: calc(var(--nav-h) + 1rem) 2rem;
+}
+.start h1 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 7.5vw, 9rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-wrap: balance;
+}
+.start h1 a {
+  display: inline-block;
+  border-bottom: 0.06em solid transparent;
+}
+.start h1 a:hover { border-bottom-color: var(--fg); }
+
+/* PDF-Seiten */
+.dokument {
+  padding-top: var(--nav-h);
+}
+.seite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100svh - var(--nav-h));
+  scroll-snap-align: start;
+}
+.seite canvas {
+  display: block;
+  background: transparent;
+  border: 1px solid var(--rand);
+}
+html.pdf-seite { scroll-snap-type: y proximity; scroll-padding-top: var(--nav-h); }
+
+.fehler {
+  padding-top: calc(var(--nav-h) + 2rem);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.fehler a { border-bottom: 2px solid var(--fg); }
